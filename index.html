@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	 <style type="text/css">
+	 i{
+	 	font-style: normal;
+	 }
+	 	.box{
+	 		width: 800px;
+	 		height: 300px;
+	 		border:1px solid #000;
+	 		margin: 0 auto;
+	 	}
+	 	.box .content{
+	 		width: 200px;
+	 		height: 100px;
+	 		border:1px solid #f90;
+	 		margin:0 auto;
+	 		text-align:center;
+	 	}
+	  .box .content.chuizhi{
+	 		width: 200px;
+	 		height: 100px;
+	 		border:1px solid #f90;
+	 		margin:0 auto;
+	 		line-height:100px;
+	 	}
+	 	
+	 	.parent{width: 300px;height: 200px;border:1px solid #000000;}
+	 	.parent .wraper{float: left; position: relative; left: 50%; clear: both;background:red;}
+	 	.parent .wraper .child{border: 1px solid blue; position: relative; left: -50%; white-space: nowrap;padding: 10px;}
+	 </style>
+	<body>
+		<!--1、块元素水平居中:margin:0 auto;-->
+		<p>1、块元素水平居中:margin:0 auto;</p>
+		<div class="box">
+			<div class="content">
+				
+			</div>
+		</div>
+		<!--2、文字水平居中-->
+		<p>2、文字水平居中text-align:center;</p>
+		<div class="box">
+			<div class="content">
+				我是水平居中的文字
+			</div>
+		</div>	
+		<!--3、使用line-height让单行的文字垂直居中-->
+      <p>3、文字垂直居中line-height:父元素的高度;</p>
+		<div class="box">
+			<div class="content chuizhi">
+				我是垂直居中的文字
+			</div>
+		</div>	
+<!--4、使用表格-->	
+<p>4、如果你使用的是表格的话，那完全不用为各种居中问题而烦恼了，只要用到 td(也可能会用到 th)元素的 align=”center” 以及 valign=”middle” 这两个属性就可以完美的处理它里面内容的水平和垂直居中问题了,而且表格默认的就会对它里面的内容进行垂直居中。如果想在css中控制表格内容的居中，垂直居中可以使用 vertical-align:middle，至于水平居中，貌似css中是没有相对应的属性的,但是在IE6、7中我们可以使用text-align:center来对表格里的元素进行水平居中，IE8+以及谷歌、火狐等浏览器的text-align:center只对行内元素起作用，对块状元素无效。
+<br>
+<br>
+在ie6、7中可以通过css的text-algin来控制表格内容的水平方向的对齐，无论内容是行内元素还是块状元素都有效。
+<br /><br />
+但在ie8+以及chrome、firefox等浏览器中的text-align:center对块状元素无效，只能用表格自有的align属性。
+</p>
+      <table>
+      	<tr>
+      		<td height="200" width="200" style="border:1px solid red; vertical-align:middle;" align='center';>
+      			<div style="width: 100px;height: 100px; background: #000;"></div>
+      		</td>
+      	</tr>
+      </table>
+      
+<!--5、使用display:table-cell模拟成表格单元格-->    
+<p>5、使用display:table-cell来居中
+
+对于那些不是表格的元素，我们可以通过display:table-cell 来把它模拟成一个表格单元格，这样就可以利用表格那很方便的居中特性了。例如：
+ <br>
+ <br>
+ 但是，这种方法只能在IE8+、谷歌、火狐等浏览器上使用，IE6、IE7都无效。
+</p>
+<div style="display:table-cell; vertical-align:middle;width:200px;height: 200px;border:1px solid #27AEA7" align='center'>
+	<div style="width: 100px; height: 100px; background: darkgrey;"></div>
+</div>
+<!--6、使用绝对定位来居中一个块元素-->
+<p>6、此法只适用于那些我们已经知道它们的宽度或高度的元素。
+
+绝对定位进行居中的原理是通过把这个绝对定位元素的left或top的属性设为50%,这个时候元素并不是居中的，而是比居中的位置向右或向左偏了这个元素宽度或高度的一半的距离，所以需要使用一个负的margin-left或margin-top的值来把它拉回到居中的位置，这个负的margin值就取元素宽度或高度的一半。</p>
+<div style="width: 500px; height:500px; border: 1px solid #009FFD; position: relative;">
+	<div style="width: 100px; height: 100px; background: #f90; position: absolute; left: 50%; top:50%; margin-left:-50px ;margin-top: -50px;"></div>
+</div>
+<br /><br />
+<!--7、另一种使用绝对定位来居中的方法-->
+<p>7、此法同样只适用于那些我们已经知道它们的宽度或高度的元素，并且遗憾的是它只支持IE9+,谷歌，火狐等符合w3c标准的现代浏览器。<br />
+这里如果不定义元素的宽和高的话，那么他的宽就会由left,right的值来决定，高会由top,bottom的值来决定，所以必须要设置元素的高和宽。<br>同时如果改变left，right , top , bottom的值还能让元素向某个方向偏移，大家可以自己去尝试。
+
+</p>
+<div style="width:500px;height: 500px;border: 1px solid #6641E2; position: relative;">
+	<div style="width: 100px; height: 100px; background: darkred; position: absolute; left:0;right:0;top:0;bottom: 0; margin:auto;"></div>
+</div>
+<!--8、使用浮动配合相对定位来进行水平居中-->
+<p style="color: #D879E3;">8、此方法也是关于浮动元素怎么水平居中的解决办法，<i style="color: #f60;">并且我们不需要知道需要居中的元素的宽度</i></p>
+<div class="parent">
+	<div class="wraper">
+		<div class="child">我水平居中了哦</div>
+	</div>
+	<div class="wraper" style="margin-top:20px;">
+		<div class="child">宽度不同哦</div>
+	</div>
+	<div class="wraper" style="margin-top:20px;">
+		<div class="child">确实哦</div>
+	</div>	
+</div>
+<!--9、利用font-size来说实现垂直居中-->
+<p>9、如果父元素高度是已知的，要把它里面的子元素进行水平垂直居中，则可以使用这种方法，且子元素的宽度或高度都不必知道。
+   <br />
+   <i style="color: #f90;">该方法只对IE6和IE7有效。</i>
+   <br />该方法的要点是给父元素设一个合适的font-size的值，这个值的取值为该父元素的高度除以1.14得到的值，并且子元素必须 是一个inline或inline-block元素，需要加上vertical-align:middle属性。
+<br />
+至于为什么是除以1.14而不是其他的数，还真没有人知道，你只需要记住1.14这个数就行了。
+<br /><br />
+在方法5中说过在IE8+、火狐谷歌等现在浏览器中可以用display:table-cell来进行居中，而这里的font-size的方法则适用于IE6和IE7，所以把这两种方法结合起来就能兼容所有浏览器了：
+</p>
+
+<p>
+	上面的例子中因为要居中的元素是一个块状元素，所以我们还需要把他变成行内元素，如果要居中的元素是图片等行内元素，则可以省略此步。<br />
+
+另外，如果 vertical-align:middle 是写在父元素中而不是子元素中，这样也是可以的，只不过计算font-size时使用的  1.14 这个 数值要变成大约 1.5 这个值。
+	
+</p>
+<div style="width: 200px; height: 200px;border: 1px solid #5EBCC9; *font-size: 175.4px; display: table-cell;vertical-align: middle; text-align: center;">
+	<div style="display: inline-block; *zoom: 1; *display: inherit; *vertical-align: middle; font-size: 12px; width:50px;height: 50px;background: blue;"></div>
+</div>
+	</body>
+</html>
